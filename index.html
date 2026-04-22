@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruLight Georgia — Operations Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: #7A6230;
+    --gold-light: #E8C96A;
+    --black: #0A0A0A;
+    --dark: #111;
+    --card: #161616;
+    --border: #2A2A2A;
+    --white: #F5F0E8;
+    --muted: #666;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .portal {
+    width: 100%;
+    max-width: 520px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  /* Brand */
+  .brand {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .brand-dot-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  .brand-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 56px);
+    letter-spacing: 3px;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  h1 span { color: var(--gold); }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+  }
+
+  /* App cards */
+  .card {
+    display: block;
+    text-decoration: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 26px;
+    margin-bottom: 14px;
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-dim);
+    background: #1a1600;
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .card-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+  }
+
+  .card-text { flex: 1; }
+
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .card-arrow {
+    font-size: 20px;
+    color: var(--gold-dim);
+    flex-shrink: 0;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .card:hover .card-arrow {
+    transform: translateX(4px);
+    color: var(--gold);
+  }
+
+  .card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .pill {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: rgba(201,168,76,0.07);
+    color: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.15);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 14px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .divider-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #333;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-text {
+    font-size: 11px;
+    color: #333;
+    letter-spacing: 1px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+  }
+
+  .footer-text span { color: var(--gold-dim); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeUp 0.4s ease both; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<div class="portal">
+
+  <!-- Brand -->
+  <div class="brand">
+    <div class="brand-dot-row">
+      <div class="dot"></div>
+      <div class="brand-tag">TruLight Georgia</div>
+      <div class="dot"></div>
+    </div>
+    <h1>OPERATIONS <span>PORTAL</span></h1>
+    <div class="subtitle">Internal tools — Alpharetta, GA</div>
+  </div>
+
+  <!-- Sales CRM -->
+  <a href="crm.html" class="card">
+    <div class="card-inner">
+      <div class="card-icon">📋</div>
+      <div class="card-text">
+        <div class="card-title">Salesperson CRM</div>
+        <div class="card-desc">Log leads, quotes, and closed jobs. Triggers all client emails and follow-up sequences automatically.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="card-pills">
+      <div class="pill">Lead Intake</div>
+      <div class="pill">Quote Calculator</div>
+      <div class="pill">Pipeline Status</div>
+      <div class="pill">Follow-Up Sequence</div>
+      <div class="pill">Calendar Scheduling</div>
+    </div>
+  </a>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-text">Field Team</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Installer Portal -->
+  <a href="installer.html" class="card">
+    <div class="card-inner">
+      <div class="card-icon">🔧</div>
+      <div class="card-text">
+        <div class="card-title">Installer Portal</div>
+        <div class="card-desc">View assigned jobs, run install checklists, calculate materials, submit photos, and capture on-site leads.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="card-pills">
+      <div class="pill">Job Board</div>
+      <div class="pill">Install Checklist</div>
+      <div class="pill">Materials Calc</div>
+      <div class="pill">Photo Submission</div>
+      <div class="pill">Lead Capture</div>
+    </div>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-text">
+      <span>TruLight Georgia</span> · Alpharetta, GA · trulightgeorgia.com
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
