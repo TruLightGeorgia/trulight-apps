@@ -9,11 +9,11 @@
 // ─── CONFIGURATION ───────────────────────────────────────────
 const CONFIG = {
   // ⚙️ REPLACE THESE VALUES WITH YOUR OWN
-  SPREADSHEET_ID:       "YOUR_GOOGLE_SHEET_ID_HERE",
-  PM_EMAIL:             "pm@trulightgeorgia.com",
-  OWNER_EMAIL:          "kenny@trulightgeorgia.com",
+  SPREADSHEET_ID:       "10SU4JoiOTwBCYohR-5ta0ehIfmVjkYCo7fTNbKML7WY",
+  PM_EMAIL:             "khub.jr@gmail.com",
+  OWNER_EMAIL:          "khub@trulightgeorgia.com",
   COMPANY_NAME:         "TruLight Georgia",
-  COMPANY_PHONE:        "(770) 555-0100",
+  COMPANY_PHONE:        "(888) 316-4687",
   COMPANY_WEBSITE:      "trulightgeorgia.com",
   CALENDAR_ID:          "primary", // or your install calendar ID
   FROM_NAME:            "TruLight Georgia",
