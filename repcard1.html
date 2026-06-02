@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruLight Georgia — Rep Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold-l:#E8C96A;--gold-d:#7A6530;--golds:rgba(201,168,76,.10);
+--black:#080808;--s1:#111;--s2:#181818;--border:#252525;--border2:#333;
+--text:#EDEBE3;--muted:#6B6760;
+--green:#4CAF7A;--red:#E05555;--blue:#5B9BD5;--purple:#A855F7;--amber:#F59E0B;
+--r:8px;--rlg:14px;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;min-height:100vh}
+/* LOGIN */
+#login{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;
+  background:radial-gradient(ellipse at 30% 20%,rgba(201,168,76,.06) 0%,transparent 60%)}
+.lbox{background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:40px 36px;width:100%;max-width:380px}
+.llogo{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:.06em;text-align:center;margin-bottom:6px}
+.lsub{font-size:11px;color:var(--muted);text-align:center;letter-spacing:.12em;text-transform:uppercase;margin-bottom:32px}
+/* APP */
+#app{display:none;flex-direction:column;min-height:100vh}
+.topbar{background:var(--s1);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:100}
+.topbar-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.06em;flex-shrink:0}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.tb-av{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.role-badge{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--golds);color:var(--gold)}
+/* TABS */
+.tabnav{background:var(--s1);border-bottom:1px solid var(--border);padding:0 16px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.tabnav::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;padding:12px 16px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.tb.active{color:var(--gold);border-bottom-color:var(--gold)}
+/* CONTENT */
+.tc{display:none;padding:20px;max-width:900px;margin:0 auto;width:100%}
+.tc.active{display:block}
+/* REP CARD */
+.rep-card{background:linear-gradient(135deg,#1A1600 0%,#0D0C08 60%,#1A1200 100%);border:1px solid var(--gold-d);border-radius:var(--rlg);padding:28px;position:relative;overflow:hidden;margin-bottom:18px}
+.rep-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold-d),var(--gold),var(--gold-l),var(--gold),var(--gold-d),transparent)}
+.rep-card-av{width:64px;height:64px;border-radius:50%;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:28px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;border:2px solid var(--gold-d)}
+.rep-card-name{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold);letter-spacing:.04em;line-height:1}
+.rep-card-role{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-top:3px;margin-bottom:18px}
+.rep-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.rep-stat{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15);border-radius:var(--r);padding:12px;text-align:center}
+.rep-stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1}
+.rep-stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+/* PANELS */
+.panel{background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);margin-bottom:14px;overflow:hidden}
+.phdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
+.ptitle{font-size:13px;font-weight:600}
+/* FORM */
+.fg{margin-bottom:12px}
+.fg label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--r);padding:9px 12px;color:var(--text);font-family:'Barlow',sans-serif;font-size:13px}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--gold)}
+.fg select option{background:var(--s1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;padding:8px 10px;border-bottom:1px solid var(--border);text-align:left}
+td{padding:10px;border-bottom:1px solid var(--border);font-size:13px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--s2)}
+/* BUTTONS */
+.btn{border:none;border-radius:var(--r);padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-gold{background:var(--gold);color:#000}.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{background:none;border:1px solid var(--border2);color:var(--muted)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{background:none;border:1px solid var(--red);color:var(--red)}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-out{background:none;border:1px solid var(--border2);border-radius:6px;color:var(--muted);font-size:11px;padding:4px 10px;cursor:pointer}
+.btn-out:hover{border-color:var(--red);color:var(--red)}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
+.mtitle{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:18px}
+.mactions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+/* CALENDAR */
+.cal-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.cal-mlbl{flex:1;text-align:center;font-size:15px;font-weight:600;color:var(--gold)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-dow-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px}
+.cal-dow{text-align:center;font-size:9px;font-weight:600;color:var(--muted);text-transform:uppercase;padding:3px 0}
+.cc{min-height:56px;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:4px;cursor:pointer}
+.cc:hover{border-color:var(--gold-d)}.cc.today{border-color:var(--gold)}.cc.sel{background:var(--golds);border-color:var(--gold)}
+.cc.empty{background:transparent;border-color:transparent;cursor:default}
+.cdnum{font-size:11px;font-weight:600;color:var(--text)}.today .cdnum{color:var(--gold)}
+.cepill{font-size:8px;padding:1px 4px;border-radius:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px}
+.cdetail{margin-top:12px;background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:12px 14px}
+.cerow{padding:7px 9px;background:var(--s2);border-radius:6px;margin-bottom:5px;border-left:3px solid var(--gold)}
+/* APPOINTMENTS */
+.appt-item{padding:10px 13px;background:var(--s2);border-radius:var(--r);margin-bottom:8px;border-left:3px solid var(--blue)}
+/* SETTINGS */
+.set-section{background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:16px 18px;margin-bottom:12px}
+.set-section h3{font-size:13px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+/* NOTIFY */
+.notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--s1);border:1px solid var(--gold-d);border-radius:var(--rlg);padding:10px 18px;font-size:13px;z-index:999;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap}
+.notif.show{opacity:1}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}.rep-stats{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="lbox">
+    <div class="llogo">TruLight Georgia</div>
+    <div class="lsub">Sales Rep Portal</div>
+    <div class="fg"><label>Email</label><input type="email" id="le" placeholder="you@trulightgeorgia.com" autocomplete="email"></div>
+    <div class="fg"><label>Password</label><input type="password" id="lp" placeholder="••••••••"></div>
+    <button class="btn btn-gold" style="width:100%;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.08em;padding:12px;margin-top:4px" onclick="doLogin()">Sign In</button>
+    <div id="lerr" style="color:var(--red);font-size:12px;text-align:center;margin-top:8px;min-height:18px"></div>
+    <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--muted)">TruLight Georgia · (888) 316-4687</div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">TruLight</div>
+    <div style="font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Rep Portal</div>
+    <div class="topbar-right">
+      <div class="tb-av" id="tb-av">KH</div>
+      <div><div style="font-size:13px" id="tb-nm">Rep</div><div class="role-badge" id="tb-role">Sales</div></div>
+      <button class="btn-out" onclick="doSignOut()">Sign Out</button>
+    </div>
+  </div>
+  <div class="tabnav">
+    <div class="tb active" onclick="switchTab('card',this)">My Card</div>
+    <div class="tb" onclick="switchTab('appointments',this)">Appointments</div>
+    <div class="tb" onclick="switchTab('leads',this)">Leads</div>
+    <div class="tb" onclick="switchTab('pipeline',this)">Pipeline</div>
+    <div class="tb" onclick="switchTab('calendar',this)">Calendar</div>
+    <div class="tb" onclick="switchTab('canvas',this)">Canvas</div>
+    <div class="tb" onclick="switchTab('leaderboard',this)">Leaderboard</div>
+    <div class="tb" onclick="switchTab('reviews',this)">Reviews</div>
+    <div class="tb" onclick="switchTab('settings',this)">Settings</div>
+  </div>
+
+  <!-- CARD -->
+  <div class="tc active" id="tc-card">
+    <div class="rep-card">
+      <div class="rep-card-av" id="card-av">KH</div>
+      <div class="rep-card-name" id="card-name">Kenny Hubbard</div>
+      <div class="rep-card-role" id="card-role">Sales · TruLight Georgia</div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="color:var(--gold);width:16px;text-align:center">📞</span><span id="card-phone">(888) 316-4687</span></div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="color:var(--gold);width:16px;text-align:center">✉</span><span id="card-email">rep@trulightgeorgia.com</span></div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="color:var(--gold);width:16px;text-align:center">🌐</span><span>TruLightGeorgia.com</span></div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="color:var(--gold);width:16px;text-align:center">📍</span><span>Alpharetta, GA · North Atlanta</span></div>
+      </div>
+      <div class="rep-stats">
+        <div class="rep-stat"><div class="rep-stat-val" id="stat-leads">0</div><div class="rep-stat-lbl">Leads</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="stat-closes">0</div><div class="rep-stat-lbl">Closed</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="stat-revenue">$0</div><div class="rep-stat-lbl">Revenue</div></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+        <a href="https://www.facebook.com/profile.php?id=61566935508958" target="_blank" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border2);font-size:12px;color:var(--muted);text-decoration:none">Facebook</a>
+        <a href="https://www.instagram.com/trulightgeorgia" target="_blank" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border2);font-size:12px;color:var(--muted);text-decoration:none">Instagram</a>
+        <a href="https://www.youtube.com/@TruLightGeorgia" target="_blank" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border2);font-size:12px;color:var(--muted);text-decoration:none">YouTube</a>
+      </div>
+    </div>
+    <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:16px 18px">
+      <h3 style="font-size:13px;font-weight:600;margin-bottom:10px">Share Your Card</h3>
+      <div style="background:var(--s2);border:1px solid var(--border2);border-radius:var(--r);padding:9px 12px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <span id="share-url">salescard.trulightgeorgia.com</span>
+        <button class="btn btn-gold btn-sm" onclick="copyShare()">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPOINTMENTS -->
+  <div class="tc" id="tc-appointments">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em">My Appointments</h2>
+      <button class="btn btn-gold btn-sm" onclick="syncAppts()">⟳ Sync</button>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Appointments assigned to you from the Operations Dashboard appear here automatically.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--blue)" id="appt-today">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Today</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold)" id="appt-week">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">This Week</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--text)" id="appt-total">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Total Assigned</div></div>
+    </div>
+    <div id="appts-list"></div>
+  </div>
+
+  <!-- LEADS -->
+  <div class="tc" id="tc-leads">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em">My Leads</h2>
+      <button class="btn btn-gold" onclick="openModal('add-lead-modal')">+ Add Lead</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold)" id="l-total">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Total</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--red)" id="l-hot">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Hot</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--blue)" id="l-appt">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Appt Set</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green)" id="l-closed">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Closed</div></div>
+    </div>
+    <div class="panel">
+      <div class="phdr">
+        <span class="ptitle">All Leads</span>
+        <input id="lead-search" type="text" placeholder="Search..." style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:12px;width:160px" oninput="renderLeads()">
+      </div>
+      <div style="overflow-x:auto"><table><thead><tr><th>Name</th><th>Phone</th><th>Address/ZIP</th><th>Stage</th><th>Score</th><th>Footage</th><th>Value</th><th></th></tr></thead><tbody id="leads-tbody"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="tc" id="tc-pipeline">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em">Pipeline</h2>
+      <div style="font-size:12px;color:var(--muted)">Value: <strong id="pipe-val" style="color:var(--gold)">$0</strong></div>
+    </div>
+    <div id="kanban" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:10px"></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="tc" id="tc-calendar">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em">Calendar</h2>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="cView='month';renderCal()">Month</button>
+        <button class="btn btn-ghost btn-sm" onclick="cView='agenda';renderCal()">Agenda</button>
+      </div>
+    </div>
+    <div class="panel"><div style="padding:14px 16px" id="cal-body"></div></div>
+  </div>
+
+  <!-- CANVAS -->
+  <div class="tc" id="tc-canvas">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em">Neighborhood Canvas</h2>
+      <button class="btn btn-gold btn-sm" onclick="openModal('add-canvas-modal')">+ Log Street</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold)" id="cv-streets">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Streets Hit</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--text)" id="cv-doors">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Doors</div></div>
+      <div class="panel" style="padding:12px 14px"><div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green)" id="cv-leads">0</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em">Leads</div></div>
+    </div>
+    <div class="panel"><div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>ZIP</th><th>Street</th><th>Doors</th><th>Contacts</th><th>Leads</th><th>Notes</th><th></th></tr></thead><tbody id="cv-tbody"></tbody></table></div></div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="tc" id="tc-leaderboard">
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px">Leaderboard</h2>
+    <div id="lb-list"></div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="tc" id="tc-reviews">
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px">Review Requests</h2>
+    <div class="panel">
+      <div class="phdr"><span class="ptitle">Send Google Review Request</span></div>
+      <div style="padding:14px 16px">
+        <div class="form-row"><div class="fg"><label>Customer Name</label><input type="text" id="rv-name" placeholder="John Smith"></div><div class="fg"><label>Phone</label><input type="tel" id="rv-ph" placeholder="(770) 555-0100"></div></div>
+        <div class="fg"><label>Message Preview</label><textarea id="rv-msg" rows="4" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:10px;color:var(--text);font-size:13px;font-family:'Barlow',sans-serif"></textarea></div>
+        <div style="display:flex;gap:8px"><button class="btn btn-ghost" onclick="genReviewMsg()">Generate</button><button class="btn btn-gold" onclick="copyReviewMsg()">Copy Message</button></div>
+      </div>
+    </div>
+    <div class="panel"><div class="phdr"><span class="ptitle">Sent Requests</span></div><div style="overflow-x:auto"><table><thead><tr><th>Customer</th><th>Date</th><th>Status</th></tr></thead><tbody id="rv-tbody"></tbody></table></div></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="tc" id="tc-settings">
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;margin-bottom:14px">Settings</h2>
+    <div class="set-section">
+      <h3>My Profile</h3>
+      <div class="form-row"><div class="fg"><label>Display Name</label><input type="text" id="set-name" oninput="saveProfile()"></div><div class="fg"><label>Phone</label><input type="tel" id="set-phone" oninput="saveProfile()"></div></div>
+      <div class="fg"><label>Email</label><input type="email" id="set-email" readonly style="background:var(--s2);color:var(--muted)"></div>
+    </div>
+    <div class="set-section">
+      <h3>Apps Script Sync</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Connect to the Operations Dashboard. Appointments assigned to you will appear in your Appointments tab automatically after syncing.</p>
+      <div class="fg"><label>Apps Script URL</label><input type="text" id="set-gs-url" placeholder="https://script.google.com/macros/s/.../exec" oninput="localStorage.setItem('tl_gs_script_url',this.value)"></div>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="btn btn-ghost btn-sm" onclick="testGS()">Test Connection</button>
+        <button class="btn btn-gold btn-sm" onclick="pushLeads()">Push My Leads</button>
+        <button class="btn btn-ghost btn-sm" onclick="syncAll()">Sync All</button>
+      </div>
+      <div id="gs-status" style="font-size:12px;margin-top:8px;min-height:18px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-bg" id="add-lead-modal">
+  <div class="modal">
+    <div class="mtitle">Add Lead</div>
+    <div class="form-row"><div class="fg"><label>First Name</label><input type="text" id="nl-fn"></div><div class="fg"><label>Last Name</label><input type="text" id="nl-ln"></div></div>
+    <div class="form-row"><div class="fg"><label>Phone</label><input type="tel" id="nl-ph"></div><div class="fg"><label>Email</label><input type="email" id="nl-em"></div></div>
+    <div class="form-row"><div class="fg"><label>Address</label><input type="text" id="nl-addr"></div><div class="fg"><label>ZIP</label><input type="text" id="nl-zip"></div></div>
+    <div class="form-row">
+      <div class="fg"><label>Footage</label><input type="number" id="nl-ft" placeholder="180" oninput="calcVal()"></div>
+      <div class="fg"><label>Est. Value</label><input type="text" id="nl-val" readonly style="background:var(--s2);color:var(--gold)"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Stage</label><select id="nl-stage"><option>New Inquiry</option><option>Appointment Set</option><option>Site Visit Done</option><option>Mockup Sent</option><option>Proposal Sent</option><option>Verbal Commit</option><option>Contract Signed</option><option>Deposit Paid</option></select></div>
+      <div class="fg"><label>Source</label><select id="nl-src"><option>Door Knock</option><option>Referral</option><option>Meta Ads</option><option>Google</option><option>Yard Sign</option><option>Neighborhood Canvass</option><option>Other</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Score</label><select id="nl-score"><option>Hot</option><option>Warm</option><option>Cool</option><option>Cold</option></select></div>
+      <div class="fg"><label>Owner</label><select id="nl-owner"></select></div>
+    </div>
+    <div class="fg"><label>Notes</label><textarea id="nl-notes" rows="2"></textarea></div>
+    <div class="mactions"><button class="btn btn-ghost" onclick="closeModal('add-lead-modal')">Cancel</button><button class="btn btn-gold" onclick="saveLead()">Save Lead</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="add-canvas-modal">
+  <div class="modal">
+    <div class="mtitle">Log Canvas Street</div>
+    <div class="form-row"><div class="fg"><label>ZIP Code</label><input type="text" id="cv-zip"></div><div class="fg"><label>Date</label><input type="date" id="cv-date"></div></div>
+    <div class="fg"><label>Street Name</label><input type="text" id="cv-street" placeholder="e.g. Maple Drive"></div>
+    <div class="form-row"><div class="fg"><label>Doors Knocked</label><input type="number" id="cv-doors-in" value="0"></div><div class="fg"><label>Contacts Made</label><input type="number" id="cv-contacts" value="0"></div></div>
+    <div class="form-row"><div class="fg"><label>Leads Generated</label><input type="number" id="cv-leads-in" value="0"></div><div class="fg"><label>Installs Nearby</label><input type="number" id="cv-installs" value="0"></div></div>
+    <div class="fg"><label>Notes</label><textarea id="cv-notes" rows="2"></textarea></div>
+    <div class="mactions"><button class="btn btn-ghost" onclick="closeModal('add-canvas-modal')">Cancel</button><button class="btn btn-gold" onclick="saveCanvas()">Save</button></div>
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+'use strict';
+
+/* ── SHARED KEYS ─────────────────────────────────────────── */
+var GS_KEY    = 'tl_gs_script_url';
+var USERS_KEY = 'tl_users';
+var LEADS_KEY = 'tl_rc_leads';
+var CAL_KEY   = 'tl_calendar';
+var CANVAS_KEY= 'tl_canvas';
+var REVIEWS_KEY='tl_reviews';
+var AUTH_KEY  = 'tl_rc_auth';
+
+/* ── DEFAULT USERS ───────────────────────────────────────── */
+var DEFAULT_USERS = [
+  {id:'u-kenny',  name:'Kenny Hubbard', email:'kj@trulightgeorgia.com',     password:'kj123',  role:'Admin',    phone:'(888) 316-4687', initials:'KH', active:true, color:'#5B9BD5'},
+  {id:'u-dee',    name:'Deontai Price', email:'deontai@trulightgeorgia.com',password:'dee123', role:'Sales',    phone:'(888) 316-4687', initials:'DP', active:true, color:'#C9A84C'},
+  {id:'u-admin',  name:'Admin',         email:'admin@trulightgeorgia.com',  password:'admin',  role:'Admin',    phone:'',              initials:'AD', active:true, color:'#A855F7'},
+];
+
+/* ── COLORS ──────────────────────────────────────────────── */
+var STAGE_COLS = {'New Inquiry':'#5B9BD5','Appointment Set':'#A855F7','Site Visit Done':'#06B6D4','Mockup Sent':'#F59E0B','Proposal Sent':'#C9A84C','Verbal Commit':'#4CAF7A','Contract Signed':'#22C55E','Deposit Paid':'#C9A84C','Converted to Job':'#C9A84C','Lost':'#E05555'};
+var CAL_COLS  = {'Appointment':'#22C55E','Site Survey':'#F59E0B','Install':'#5B9BD5','Follow-Up':'#A855F7','Task':'#C9A84C','Meeting':'#06B6D4','Reminder':'#78716C'};
+
+/* ── CURRENT USER ────────────────────────────────────────── */
+var CU = null;
+
+/* ── USER HELPERS ────────────────────────────────────────── */
+function getUsers(){
+  try{ var s=JSON.parse(localStorage.getItem(USERS_KEY)||'[]'); return s.length?s:DEFAULT_USERS; }
+  catch(e){ return DEFAULT_USERS; }
+}
+function activeUsers(){ return getUsers().filter(function(u){ return u.active!==false; }); }
+
+function buildOwnerSelect() {
+  var el = document.getElementById('nl-owner'); if(!el) return;
+  var users = activeUsers(); var cur = el.value;
+  el.innerHTML = users.map(function(u){
+    return '<option value="'+u.name+'"'+(u.name===cur?' selected':'')+'>'+u.name+' ('+u.role+')</option>';
+  }).join('');
+  if (CU) el.value = CU.name;
+}
+
+/* ── AUTH ────────────────────────────────────────────────── */
+function doLogin() {
+  var email=(document.getElementById('le').value||'').trim().toLowerCase();
+  var pass=document.getElementById('lp').value||'';
+  var users=getUsers();
+  var u=users.find(function(u){ return u.email.toLowerCase()===email&&(u.password===pass||u.pass===pass); });
+  if (!u){ document.getElementById('lerr').textContent='Invalid email or password'; return; }
+  if (u.active===false){ document.getElementById('lerr').textContent='Account inactive'; return; }
+  CU=u; localStorage.setItem(AUTH_KEY,JSON.stringify(u));
+  document.getElementById('lerr').textContent=''; startApp();
+}
+function doSignOut(){
+  CU=null; localStorage.removeItem(AUTH_KEY);
+  document.getElementById('app').style.display='none';
+  document.getElementById('login').style.display='flex';
+}
+
+/* ── APP START ───────────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', function(){
+  var stored=localStorage.getItem(AUTH_KEY);
+  if(stored){ try{ CU=JSON.parse(stored); startApp(); return; }catch(e){} }
+  document.getElementById('le').addEventListener('keydown',function(e){ if(e.key==='Enter') document.getElementById('lp').focus(); });
+  document.getElementById('lp').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+  var su=document.getElementById('set-gs-url'); if(su) su.value=localStorage.getItem(GS_KEY)||'';
+  document.getElementById('cv-date').value=todayStr();
+});
+
+function startApp(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('app').style.flexDirection='column';
+  document.getElementById('tb-av').textContent=CU.initials||'?';
+  document.getElementById('tb-nm').textContent=CU.name;
+  document.getElementById('tb-role').textContent=CU.role;
+  document.getElementById('card-av').textContent=CU.initials||'?';
+  document.getElementById('card-name').textContent=CU.name;
+  document.getElementById('card-role').textContent=CU.role+' · TruLight Georgia';
+  if(CU.phone) document.getElementById('card-phone').textContent=CU.phone;
+  document.getElementById('card-email').textContent=CU.email;
+  var sn=document.getElementById('set-name'); if(sn) sn.value=CU.name;
+  var sp=document.getElementById('set-phone'); if(sp) sp.value=CU.phone||'';
+  var se=document.getElementById('set-email'); if(se) se.value=CU.email;
+  var su=document.getElementById('set-gs-url'); if(su) su.value=localStorage.getItem(GS_KEY)||'';
+  buildOwnerSelect();
+  renderAppointments(); renderLeads(); renderKanban(); renderCal();
+  renderCanvas(); renderLeaderboard(); renderReviews(); updateCardStats();
+  // Pull latest from Sheets on login
+  pullCalendarFromGS().then(function(){ renderCal(); renderAppointments(); });
+  pullUsersFromGS().then(function(){ buildOwnerSelect(); });
+}
+
+/* ── HELPERS ─────────────────────────────────────────────── */
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function fmt(n){ return '$'+Math.abs(parseFloat(n)||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function notify(msg){ var n=document.getElementById('notif'); n.textContent=msg; n.classList.add('show'); setTimeout(function(){n.classList.remove('show');},3200); }
+function openModal(id){ document.getElementById(id).classList.add('open'); buildOwnerSelect(); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function getItem(k){ try{ return JSON.parse(localStorage.getItem(k)||'[]'); }catch(e){ return []; } }
+function setItem(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+
+function switchTab(tab,el){
+  document.querySelectorAll('.tc').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.tb').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('tc-'+tab).classList.add('active');
+  if(el) el.classList.add('active');
+  if(tab==='appointments') renderAppointments();
+  if(tab==='leads')        renderLeads();
+  if(tab==='pipeline')     renderKanban();
+  if(tab==='calendar')     renderCal();
+  if(tab==='canvas')       renderCanvas();
+  if(tab==='leaderboard')  renderLeaderboard();
+  if(tab==='reviews')      renderReviews();
+}
+
+function calcVal(){
+  var ft=parseFloat(document.getElementById('nl-ft').value||0);
+  var el=document.getElementById('nl-val'); if(el) el.value=ft>0?fmt(ft*38.5+650):'$0';
+}
+function copyShare(){
+  var url=document.getElementById('share-url').textContent;
+  navigator.clipboard&&navigator.clipboard.writeText(url).then(function(){ notify('Link copied'); });
+}
+
+/* ── APPOINTMENTS ────────────────────────────────────────── */
+function getMyAssignedEvents() {
+  if(!CU) return [];
+  var today=todayStr();
+  return getItem(CAL_KEY).filter(function(ev){
+    var d=(ev.start||'').slice(0,10);
+    if(d<today) return false;
+    var assigned = ev.assignee && ev.assignee.toLowerCase().indexOf(CU.name.toLowerCase())>=0;
+    var isApptType = ['Appointment','Site Survey','Install'].indexOf(ev.type)>=0;
+    return assigned || isApptType;
+  }).sort(function(a,b){ return a.start>b.start?1:-1; });
+}
+
+function renderAppointments(){
+  var evs=getMyAssignedEvents();
+  var today=todayStr();
+  var weekEnd=new Date(); weekEnd.setDate(weekEnd.getDate()+7);
+  var we=weekEnd.toISOString().slice(0,10);
+  function setE(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  setE('appt-today',evs.filter(function(e){return (e.start||'').slice(0,10)===today;}).length);
+  setE('appt-week',evs.filter(function(e){var d=(e.start||'').slice(0,10);return d>today&&d<=we;}).length);
+  setE('appt-total',evs.length);
+  var container=document.getElementById('appts-list'); if(!container)return;
+  if(!evs.length){
+    container.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">No appointments assigned to you yet.<br><span style="font-size:11px">Click Sync to pull latest from the Operations Dashboard.</span></div>';
+    return;
+  }
+  var html='',lastDk='';
+  evs.forEach(function(ev){
+    var dk=(ev.start||'').slice(0,10);
+    if(dk!==lastDk){
+      var it=dk===today;
+      var dateLabel=new Date(dk+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+      html+='<div style="font-size:10px;font-weight:600;color:'+(it?'var(--gold)':'var(--muted)')+';text-transform:uppercase;letter-spacing:.09em;padding:10px 0 6px;border-bottom:1px solid var(--border);margin-bottom:8px'+(lastDk?';margin-top:18px':'')+'">'+
+        (it?'TODAY — ':'')+dateLabel+'</div>';
+      lastDk=dk;
+    }
+    var col=CAL_COLS[ev.type]||'var(--gold)';
+    var timeStr=ev.start&&ev.start.length>10?new Date(ev.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+    html+='<div class="appt-item" style="border-left-color:'+col+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div>'+
+          '<div style="font-size:13px;font-weight:500">'+ev.title+'</div>'+
+          '<div style="font-size:11px;color:'+col+';margin-top:2px">'+ev.type+(timeStr?' · '+timeStr:'')+'</div>'+
+          (ev.notes?'<div style="font-size:11px;color:var(--muted);margin-top:2px">'+ev.notes+'</div>':'')+
+          (ev.assignee?'<div style="font-size:10px;color:var(--muted);margin-top:2px">Assigned to: '+ev.assignee+'</div>':'')+
+        '</div>'+
+        '<div style="font-size:11px;color:var(--muted);white-space:nowrap;margin-left:10px">'+dk+'</div>'+
+      '</div></div>';
+  });
+  container.innerHTML=html;
+}
+
+function syncAppts(){
+  notify('Syncing...');
+  pullCalendarFromGS().then(function(){
+    renderCal(); renderAppointments();
+    notify('Synced ✅');
+  });
+}
+
+/* ── LEADS ───────────────────────────────────────────────── */
+function getLeads(){ return getItem(LEADS_KEY); }
+function saveLeads(arr){ setItem(LEADS_KEY,arr); }
+
+function saveLead(){
+  var fn=(document.getElementById('nl-fn').value||'').trim();
+  var ln=(document.getElementById('nl-ln').value||'').trim();
+  if(!fn&&!ln){notify('Enter a name');return;}
+  var ft=parseFloat(document.getElementById('nl-ft').value||0);
+  var lead={id:'lead-'+Date.now(),firstName:fn,lastName:ln,customer:(fn+' '+ln).trim(),
+    phone:document.getElementById('nl-ph').value||'',email:document.getElementById('nl-em').value||'',
+    address:document.getElementById('nl-addr').value||'',zip:document.getElementById('nl-zip').value||'',
+    footage:ft,rate:38.5,controllers:1,value:ft*38.5+650,
+    stage:document.getElementById('nl-stage').value||'New Inquiry',
+    source:document.getElementById('nl-src').value||'Door Knock',
+    score:document.getElementById('nl-score').value||'Warm',
+    owner:document.getElementById('nl-owner').value||CU.name,
+    notes:document.getElementById('nl-notes').value||'',date:todayStr(),convertedToJob:false};
+  var leads=getLeads(); leads.push(lead); saveLeads(leads);
+  closeModal('add-lead-modal');
+  ['nl-fn','nl-ln','nl-ph','nl-em','nl-addr','nl-zip','nl-ft','nl-notes'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  renderLeads(); renderKanban(); updateCardStats();
+  gsSync('saveLead',{record:lead});
+  notify('Lead added: '+lead.customer);
+}
+
+function deleteLead(id){
+  if(!confirm('Remove?'))return;
+  saveLeads(getLeads().filter(function(l){return l.id!==id;}));
+  renderLeads(); renderKanban(); updateCardStats();
+  gsSync('deleteLead',{id:id});
+}
+
+function setStage(id,stage){
+  var leads=getLeads(); var l=leads.find(function(x){return x.id===id;}); if(!l)return;
+  l.stage=stage; saveLeads(leads); renderLeads(); renderKanban();
+  gsSync('saveLead',{record:l});
+}
+
+function updateCardStats(){
+  var leads=getLeads();
+  var myLeads=leads.filter(function(l){return !CU||l.owner===CU.name;});
+  var closed=myLeads.filter(function(l){return ['Contract Signed','Deposit Paid','Converted to Job'].indexOf(l.stage)>=0;});
+  var rev=closed.reduce(function(s,l){return s+(l.value||0);},0);
+  function setE(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  setE('stat-leads',myLeads.length); setE('stat-closes',closed.length); setE('stat-revenue',fmt(rev));
+  setE('l-total',leads.length);
+  setE('l-hot',leads.filter(function(l){return l.score==='Hot';}).length);
+  setE('l-appt',leads.filter(function(l){return l.stage==='Appointment Set'||l.stage==='Site Visit Done';}).length);
+  setE('l-closed',closed.length);
+}
+
+function renderLeads(){
+  var q=(document.getElementById('lead-search').value||'').toLowerCase();
+  var all=getLeads().filter(function(l){return !q||(l.customer+l.phone+l.address+l.zip).toLowerCase().indexOf(q)>=0;});
+  var tbody=document.getElementById('leads-tbody'); if(!tbody)return;
+  var scoreColors={Hot:'var(--red)',Warm:'var(--amber)',Cool:'var(--blue)',Cold:'var(--muted)'};
+  tbody.innerHTML=all.length?all.map(function(l){
+    var col=STAGE_COLS[l.stage]||'#888';
+    return '<tr><td><div style="font-weight:500">'+(l.customer||'—')+'</div><div style="font-size:10px;color:var(--muted)">'+(l.email||'')+'</div></td>'+
+      '<td style="font-size:12px">'+(l.phone||'—')+'</td><td style="font-size:12px">'+(l.address||l.zip||'—')+'</td>'+
+      '<td><span class="badge" style="background:'+col+'22;color:'+col+'">'+l.stage+'</span></td>'+
+      '<td style="color:'+(scoreColors[l.score]||'var(--muted)')+';font-weight:600;font-size:12px">'+l.score+'</td>'+
+      '<td style="font-size:12px">'+(l.footage?l.footage+' ft':'—')+'</td>'+
+      '<td style="color:var(--gold)">'+(l.value?fmt(l.value):'—')+'</td>'+
+      '<td><button class="btn btn-danger btn-sm" onclick="deleteLead(\''+l.id+'\')">✕</button></td></tr>';
+  }).join(''):'<tr><td colspan="8"><div style="text-align:center;padding:18px;color:var(--muted)">No leads yet</div></td></tr>';
+  updateCardStats();
+}
+
+/* ── PIPELINE ────────────────────────────────────────────── */
+function renderKanban(){
+  var el=document.getElementById('kanban'); if(!el)return;
+  var leads=getLeads();
+  var total=leads.reduce(function(s,l){return s+(l.value||0);},0);
+  var pv=document.getElementById('pipe-val'); if(pv) pv.textContent=fmt(total);
+  var stages=['New Inquiry','Appointment Set','Mockup Sent','Proposal Sent','Contract Signed','Deposit Paid'];
+  el.innerHTML=stages.map(function(stage){
+    var col=STAGE_COLS[stage]||'#888';
+    var items=leads.filter(function(l){return l.stage===stage;});
+    return '<div style="flex-shrink:0;width:190px">'+
+      '<div style="background:'+col+'22;border:1px solid '+col+'44;border-radius:8px;padding:8px 10px;margin-bottom:8px;display:flex;justify-content:space-between">'+
+        '<span style="font-size:11px;font-weight:600;color:'+col+'">'+stage+'</span>'+
+        '<span style="background:'+col+'33;color:'+col+';font-size:10px;padding:1px 6px;border-radius:8px">'+items.length+'</span></div>'+
+      (items.map(function(l){
+        return '<div style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;margin-bottom:6px">'+
+          '<div style="font-size:12px;font-weight:500;margin-bottom:3px">'+l.customer+'</div>'+
+          '<div style="font-size:10px;color:var(--muted)">'+(l.footage?l.footage+' ft · ':'')+fmt(l.value||0)+'</div>'+
+          '<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">'+
+            ['New Inquiry','Appointment Set','Proposal Sent','Deposit Paid'].map(function(s){
+              return '<button style="font-size:9px;padding:2px 5px;border:1px solid '+(s===stage?col:'var(--border)')+';background:'+(s===stage?col+'22':'transparent')+';color:'+(s===stage?col:'var(--muted)')+';border-radius:4px;cursor:pointer" onclick="setStage(\''+l.id+'\',\''+s+'\')">'+s.split(' ')[0]+'</button>';
+            }).join('')+'</div></div>';
+      }).join(''))||'<div style="text-align:center;padding:14px;color:var(--muted);font-size:11px">Empty</div>'+
+    '</div>';
+  }).join('');
+}
+
+/* ── CALENDAR ────────────────────────────────────────────── */
+var cYear=new Date().getFullYear(),cMonth=new Date().getMonth(),cView='month',cSelDay=null;
+function getCal(){ return getItem(CAL_KEY); }
+function saveCal(arr){ setItem(CAL_KEY,arr); }
+function dkStr(y,m,d){ return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
+function evOnDay(dk){ return getCal().filter(function(e){ return (e.start||'').slice(0,10)===dk; }).sort(function(a,b){ return a.start>b.start?1:-1; }); }
+
+function renderCal(){
+  var el=document.getElementById('cal-body'); if(!el)return;
+  if(cView==='agenda'){renderAgenda(el);return;}
+  var today=todayStr(),days=new Date(cYear,cMonth+1,0).getDate(),first=new Date(cYear,cMonth,1).getDay();
+  var mname=new Date(cYear,cMonth,1).toLocaleString('default',{month:'long'});
+  var html='<div class="cal-hdr"><button class="btn btn-ghost btn-sm" onclick="cNav(-1)">◀</button>'+
+    '<div class="cal-mlbl">'+mname+' '+cYear+'</div>'+
+    '<button class="btn btn-ghost btn-sm" onclick="cNav(1)">▶</button>'+
+    '<button class="btn btn-ghost btn-sm" onclick="cToday()">Today</button></div>';
+  html+='<div class="cal-dow-row">'+['Su','Mo','Tu','We','Th','Fr','Sa'].map(function(d){return '<div class="cal-dow">'+d+'</div>';}).join('')+'</div>';
+  html+='<div class="cal-grid">';
+  for(var i=0;i<first;i++) html+='<div class="cc empty"></div>';
+  for(var d=1;d<=days;d++){
+    var dk=dkStr(cYear,cMonth,d),evs=evOnDay(dk);
+    var cls='cc'+(dk===today?' today':'')+(dk===cSelDay?' sel':'');
+    html+='<div class="'+cls+'" onclick="cSel(\''+dk+'\')"><div class="cdnum">'+d+'</div>';
+    evs.slice(0,2).forEach(function(ev){var col=CAL_COLS[ev.type]||'var(--gold)';html+='<div class="cepill" style="background:'+col+'22;color:'+col+'">'+ev.title+'</div>';});
+    if(evs.length>2) html+='<div style="font-size:8px;color:var(--muted)">+'+(evs.length-2)+'</div>';
+    html+='</div>';
+  }
+  var tot=first+days,rem=tot%7; if(rem>0) for(var i=rem;i<7;i++) html+='<div class="cc empty"></div>';
+  html+='</div>';
+  if(cSelDay){
+    var devs=evOnDay(cSelDay);
+    var selFmt=new Date(cSelDay+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    html+='<div class="cdetail"><div style="margin-bottom:8px;font-size:13px;font-weight:500">'+selFmt+'</div>';
+    if(!devs.length) html+='<div style="font-size:12px;color:var(--muted)">No events</div>';
+    devs.forEach(function(ev){
+      var col=CAL_COLS[ev.type]||'var(--gold)';
+      var ts=ev.start&&ev.start.length>10?new Date(ev.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+      html+='<div class="cerow" style="border-left-color:'+col+'">'+
+        '<div style="font-size:13px;font-weight:500">'+ev.title+'</div>'+
+        '<div style="font-size:10px;color:'+col+'">'+ev.type+(ts?' · '+ts:'')+'</div>'+
+        (ev.assignee?'<div style="font-size:10px;color:var(--muted)">'+ev.assignee+'</div>':'')+
+        (ev.notes?'<div style="font-size:11px;color:var(--muted)">'+ev.notes+'</div>':'')+
+      '</div>';
+    });
+    html+='</div>';
+  }
+  el.innerHTML=html;
+}
+
+function renderAgenda(el){
+  var today=todayStr();
+  var evs=getCal().filter(function(e){return (e.start||'').slice(0,10)>=today;}).sort(function(a,b){return a.start>b.start?1:-1;}).slice(0,40);
+  if(!evs.length){el.innerHTML='<div style="text-align:center;padding:24px;color:var(--muted)">No upcoming events</div>';return;}
+  var html='',lastDk='';
+  evs.forEach(function(ev){
+    var dk=(ev.start||'').slice(0,10);
+    if(dk!==lastDk){var it=dk===today;html+='<div style="font-size:10px;font-weight:600;color:'+(it?'var(--gold)':'var(--muted)')+';text-transform:uppercase;letter-spacing:.08em;padding:8px 0 4px;border-bottom:1px solid var(--border);margin-top:'+(lastDk?'12px':'0')+'">'+
+      (it?'TODAY — ':'')+new Date(dk+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+'</div>';lastDk=dk;}
+    var col=CAL_COLS[ev.type]||'var(--gold)';
+    html+='<div class="cerow" style="border-left-color:'+col+';margin-bottom:5px">'+
+      '<div style="font-size:13px;font-weight:500">'+ev.title+'</div>'+
+      '<div style="font-size:10px;color:'+col+'">'+ev.type+'</div>'+
+      (ev.assignee?'<div style="font-size:10px;color:var(--muted)">'+ev.assignee+'</div>':'')+
+      (ev.notes?'<div style="font-size:11px;color:var(--muted)">'+ev.notes+'</div>':'')+
+    '</div>';
+  });
+  el.innerHTML=html;
+}
+function cNav(d){cMonth+=d;if(cMonth>11){cMonth=0;cYear++;}if(cMonth<0){cMonth=11;cYear--;}renderCal();}
+function cToday(){cYear=new Date().getFullYear();cMonth=new Date().getMonth();cSelDay=todayStr();renderCal();}
+function cSel(dk){cSelDay=dk;renderCal();}
+
+/* ── CANVAS ──────────────────────────────────────────────── */
+function saveCanvas(){
+  var zip=(document.getElementById('cv-zip').value||'').trim();
+  var street=(document.getElementById('cv-street').value||'').trim();
+  if(!zip&&!street){notify('Enter ZIP or street');return;}
+  var entry={id:'cv-'+Date.now(),date:document.getElementById('cv-date').value||todayStr(),zip,street,
+    doors:parseInt(document.getElementById('cv-doors-in').value||0),
+    contacts:parseInt(document.getElementById('cv-contacts').value||0),
+    leads:parseInt(document.getElementById('cv-leads-in').value||0),
+    installs:parseInt(document.getElementById('cv-installs').value||0),
+    notes:document.getElementById('cv-notes').value||'',rep:CU?CU.name:''};
+  var arr=getItem(CANVAS_KEY); arr.push(entry); setItem(CANVAS_KEY,arr);
+  closeModal('add-canvas-modal');
+  ['cv-zip','cv-street','cv-notes'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  ['cv-doors-in','cv-contacts','cv-leads-in','cv-installs'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='0';});
+  renderCanvas(); notify('Canvas entry saved');
+}
+function delCanvas(id){setItem(CANVAS_KEY,getItem(CANVAS_KEY).filter(function(e){return e.id!==id;}));renderCanvas();}
+function renderCanvas(){
+  var arr=getItem(CANVAS_KEY);
+  function setE(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  setE('cv-streets',arr.length);
+  setE('cv-doors',arr.reduce(function(s,e){return s+e.doors;},0));
+  setE('cv-leads',arr.reduce(function(s,e){return s+e.leads;},0));
+  var tbody=document.getElementById('cv-tbody'); if(!tbody)return;
+  tbody.innerHTML=arr.length?arr.slice().reverse().map(function(e){
+    return '<tr><td>'+e.date+'</td><td>'+e.zip+'</td><td>'+e.street+'</td><td>'+e.doors+'</td><td>'+e.contacts+'</td><td style="color:var(--green)">'+e.leads+'</td><td style="font-size:11px;color:var(--muted)">'+e.notes+'</td><td><button class="btn btn-danger btn-sm" onclick="delCanvas(\''+e.id+'\')">✕</button></td></tr>';
+  }).join(''):'<tr><td colspan="8"><div style="text-align:center;padding:18px;color:var(--muted)">No canvas entries yet</div></td></tr>';
+}
+
+/* ── LEADERBOARD ─────────────────────────────────────────── */
+function renderLeaderboard(){
+  var el=document.getElementById('lb-list'); if(!el)return;
+  var leads=getLeads(), repMap={};
+  leads.forEach(function(l){
+    var rep=l.owner||'Unassigned';
+    if(!repMap[rep]) repMap[rep]={name:rep,leads:0,closed:0,revenue:0};
+    repMap[rep].leads++;
+    if(['Contract Signed','Deposit Paid','Converted to Job'].indexOf(l.stage)>=0){repMap[rep].closed++;repMap[rep].revenue+=(l.value||0);}
+  });
+  var reps=Object.values(repMap).sort(function(a,b){return b.revenue-a.revenue;});
+  if(!reps.length){el.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">No rep data yet</div>';return;}
+  el.innerHTML=reps.map(function(r,i){
+    var medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+    return '<div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--rlg);padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px">'+
+      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:28px;color:var(--gold);width:32px;text-align:center">'+(medal||('#'+(i+1)))+'</div>'+
+      '<div style="flex:1"><div style="font-size:14px;font-weight:500">'+r.name+'</div><div style="font-size:11px;color:var(--muted)">'+r.leads+' leads · '+r.closed+' closed</div></div>'+
+      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:22px;color:var(--gold)">'+fmt(r.revenue)+'</div></div>';
+  }).join('');
+}
+
+/* ── REVIEWS ─────────────────────────────────────────────── */
+function genReviewMsg(){
+  var name=document.getElementById('rv-name').value||'[Customer]';
+  var rep=CU?CU.name.split(' ')[0]:'Your Rep';
+  var msg='Hi '+name+'! It\'s '+rep+' from TruLight Georgia 🏡 We hope you\'re loving your new lights! If you have 2 minutes, a Google review would mean the world to us: [GOOGLE REVIEW LINK] Thank you! — '+rep;
+  var el=document.getElementById('rv-msg'); if(el) el.value=msg;
+}
+function copyReviewMsg(){
+  var el=document.getElementById('rv-msg'); if(!el)return;
+  var msg=el.value;
+  navigator.clipboard&&navigator.clipboard.writeText(msg).then(function(){notify('Copied');});
+  var name=document.getElementById('rv-name').value||'';
+  if(name){var arr=getItem(REVIEWS_KEY);arr.push({id:'rv-'+Date.now(),customer:name,date:todayStr(),status:'Sent'});setItem(REVIEWS_KEY,arr);renderReviews();}
+}
+function renderReviews(){
+  var tbody=document.getElementById('rv-tbody'); if(!tbody)return;
+  var arr=getItem(REVIEWS_KEY).slice().reverse();
+  tbody.innerHTML=arr.length?arr.map(function(r){return '<tr><td>'+r.customer+'</td><td>'+r.date+'</td><td><span class="badge" style="background:rgba(76,175,122,.15);color:var(--green)">'+r.status+'</span></td></tr>';}).join(''):'<tr><td colspan="3"><div style="text-align:center;padding:18px;color:var(--muted)">No requests sent yet</div></td></tr>';
+}
+
+/* ── PROFILE ─────────────────────────────────────────────── */
+function saveProfile(){
+  if(!CU)return;
+  CU.name=document.getElementById('set-name').value||CU.name;
+  CU.phone=document.getElementById('set-phone').value||CU.phone;
+  localStorage.setItem(AUTH_KEY,JSON.stringify(CU));
+  document.getElementById('tb-nm').textContent=CU.name;
+  document.getElementById('card-name').textContent=CU.name;
+  if(CU.phone) document.getElementById('card-phone').textContent=CU.phone;
+}
+
+/* ── GS SYNC ─────────────────────────────────────────────── */
+function gsUrl(){ return localStorage.getItem(GS_KEY)||''; }
+
+async function gsSync(action,payload){
+  var url=gsUrl(); if(!url)return;
+  try{ await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(Object.assign({action:action},payload||{}))}); }catch(e){}
+}
+
+async function pullCalendarFromGS(){
+  var url=gsUrl(); if(!url)return;
+  try{
+    var sep=url.indexOf('?')>=0?'&':'?';
+    var res=await fetch(url+sep+'action=getCalendar',{redirect:'follow'});
+    var txt=await res.text(); var r; try{r=JSON.parse(txt);}catch(e){return;}
+    if(!r||!r.rows||!r.rows.length)return;
+    var local=getCal(); var changed=false;
+    r.rows.forEach(function(row){
+      if(!row.id)return;
+      var idx=local.findIndex(function(e){return String(e.id)===String(row.id);});
+      if(idx>=0){local[idx]=row;}else{local.push(row);}
+      changed=true;
+    });
+    if(changed)saveCal(local);
+  }catch(e){}
+}
+
+async function pullUsersFromGS(){
+  var url=gsUrl(); if(!url)return;
+  try{
+    var sep=url.indexOf('?')>=0?'&':'?';
+    var res=await fetch(url+sep+'action=getUsers',{redirect:'follow'});
+    var txt=await res.text(); var r; try{r=JSON.parse(txt);}catch(e){return;}
+    if(!r||!r.rows||!r.rows.length)return;
+    var local=getUsers();
+    r.rows.forEach(function(row){
+      if(!row.id||!row.name)return;
+      var idx=local.findIndex(function(u){return u.id===row.id;});
+      var user={id:row.id,name:row.name,email:row.email||'',password:row.password||'trulight123',
+        role:row.role||'Sales',phone:row.phone||'',
+        initials:row.initials||(row.name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2)),
+        color:row.color||'#888',active:row.active!==false&&row.active!=='false'};
+      if(idx>=0)local[idx]=user;else local.push(user);
+    });
+    localStorage.setItem(USERS_KEY,JSON.stringify(local));
+  }catch(e){}
+}
+
+async function testGS(){
+  var url=(document.getElementById('set-gs-url').value||'').trim(); if(!url){notify('Enter URL');return;}
+  localStorage.setItem(GS_KEY,url);
+  var el=document.getElementById('gs-status'); if(el)el.innerHTML='Testing...';
+  try{
+    var sep=url.indexOf('?')>=0?'&':'?';
+    var res=await fetch(url+sep+'action=ping',{redirect:'follow'});
+    var txt=await res.text(); var r; try{r=JSON.parse(txt);}catch(e){r={raw:txt};}
+    if(r&&r.ok){if(el)el.innerHTML='<span style="color:var(--green)">✅ Connected v'+(r.v||'?')+'</span>';notify('Connected ✅');}
+    else{if(el)el.innerHTML='<span style="color:var(--red)">❌ '+(r.error||r.raw||'failed')+'</span>';}
+  }catch(e){if(el)el.innerHTML='<span style="color:var(--red)">❌ '+e.message+'</span>';}
+}
+
+async function pushLeads(){
+  var url=gsUrl(); if(!url){notify('Configure URL in Settings');return;}
+  var leads=getLeads(); if(!leads.length){notify('No leads to push');return;}
+  notify('Pushing '+leads.length+' leads...');
+  await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
+    body:JSON.stringify({action:'bulkSync',Leads:leads})});
+  notify('Pushed ✅');
+}
+
+async function syncAll(){
+  notify('Syncing...');
+  await Promise.all([pullCalendarFromGS(),pullUsersFromGS()]);
+  buildOwnerSelect(); renderCal(); renderAppointments();
+  notify('Synced ✅');
+}
+</script>
+</body>
+</html>
